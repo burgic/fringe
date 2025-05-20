@@ -1,0 +1,16 @@
+{
+  "compatibility_date": "2025-04-01",
+  "main": "src/index.ts",
+  "name": "fringe",
+  "upload_source_maps": true,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_id": "be2bd6c0-bfa4-4e08-a85b-095dc0cf3294",
+      "database_name": "fringe"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
