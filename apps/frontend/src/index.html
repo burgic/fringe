@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edinburgh Fringe Show Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎭 Edinburgh Fringe Show Finder</h1>
+            <p class="subtitle">Quality-first show discovery with real-time availability</p>
+        </header>
+
+        <div class="controls">
+            <div class="view-toggle">
+                <button class="view-btn active" data-view="spreadsheet">📊 Spreadsheet</button>
+                <button class="view-btn" data-view="grid">🔍 Advanced</button>
+            </div>
+
+            <div class="date-picker">
+                <label>📅</label>
+                <input type="date" id="date-picker" value="2025-08-01">
+            </div>
+
+            <div class="availability-toggle">
+                <span>Available only</span>
+                <div class="toggle-switch active" id="availability-toggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Spreadsheet View (Default) -->
+            <div class="spreadsheet-view active" id="spreadsheet-view">
+                <table class="spreadsheet-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 120px;">Winners List</th>
+                            <th style="width: 120px;">Might Be Good</th>
+                            <th style="width: 120px;">Might be OK</th>
+                            <th style="width: 120px;">If it's raining</th>
+                            <th style="width: 120px;">Wild Cards</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dynamic content loaded here -->
+                        <tr>
+                            <td class="empty-cell loading-cell" colspan="5">Loading shows...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Advanced Grid View -->
+            <div class="grid-view" id="grid-view">
+                <div class="loading-message">Loading shows...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

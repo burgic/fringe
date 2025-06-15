@@ -1,0 +1,38 @@
+{
+  "name": "fringe-ticket-worker",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:scraper": "cd apps/scraper && wrangler dev",
+    "dev:scheduler": "cd apps/scheduler && wrangler dev", 
+    "dev:api": "cd apps/api && wrangler dev",
+    "dev:frontend": "cd apps/frontend && wrangler pages dev src",
+    "dev:admin": "cd apps/admin && wrangler pages dev src",
+    
+    "deploy:all": "./scripts/deploy.sh",
+    "deploy:scraper": "cd apps/scraper && wrangler deploy",
+    "deploy:scheduler": "cd apps/scheduler && wrangler deploy",
+    "deploy:api": "cd apps/api && wrangler deploy",
+    "deploy:frontend": "cd apps/frontend && wrangler pages deploy src",
+    "deploy:admin": "cd apps/admin && wrangler pages deploy src",
+    
+    "setup-db": "./scripts/setup-database.sh",
+    "seed-db": "./scripts/seed-database.sh",
+    "test:scraper": "node scripts/test-scraper.js",
+    
+    "logs:scraper": "cd apps/scraper && wrangler tail",
+    "logs:scheduler": "cd apps/scheduler && wrangler tail",
+    "logs:api": "cd apps/api && wrangler tail"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.8.19",
+    "vitest": "~3.0.7",
+    "wrangler": "^4.19.1"
+  },
+  "dependencies": {
+    "@cloudflare/puppeteer": "^1.0.2"
+  }
+}

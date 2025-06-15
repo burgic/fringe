@@ -1,0 +1,27 @@
+name = "fringe-scheduler"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "fringe-shows"
+database_id = "d18a6a61-ab0a-4ddf-88a2-f5f55c844876"
+
+[triggers]
+crons = ["0 * * * *"]  # Run every hour
+
+# Use service binding instead of HTTP calls
+[[services]]
+binding = "SCRAPER"
+service = "fringe-scraper"
+
+[env.production]
+name = "fringe-scheduler"
+
+[env.staging]
+name = "fringe-scheduler-staging"
+
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "fringe-shows"
+database_id = "d18a6a61-ab0a-4ddf-88a2-f5f55c844876"

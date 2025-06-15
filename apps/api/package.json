@@ -1,0 +1,12 @@
+{
+  "name": "fringe-api",
+  "version": "0.0.0", 
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "test:lookup": "curl 'https://fringe-api.hraasing.workers.dev/lookup?date=2025-08-01'",
+    "test:shows": "curl https://fringe-api.hraasing.workers.dev/shows",
+    "test:stats": "curl https://fringe-api.hraasing.workers.dev/stats"
+  }
+}

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fringe Show Tracker - Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .tab.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-success {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .status-success {
+            color: #2ecc71;
+            font-weight: 600;
+        }
+        
+        .status-error {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛠️ Fringe Show Tracker - Admin</h1>
+            <p>Manage shows and monitor scraping</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('shows')">📋 Shows</button>
+            <button class="tab" onclick="showTab('logs')">📊 Scrape Logs</button>
+            <button class="tab" onclick="showTab('stats')">📈 Statistics</button>
+        </div>
+
+        <!-- Shows Tab -->
+        <div id="shows-tab" class="tab-content active">
+            <h2>Manage Shows</h2>
+            
+            <div id="alert-container"></div>
+            
+            <form id="add-show-form">
+                <div class="form-group">
+                    <label for="show-title">Title *</label>
+                    <input type="text" id="show-title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="show-url">Edinburgh Fringe URL *</label>
+                    <input type="url" id="show-url" placeholder="https://www.edfringe.com/tickets/whats-on/..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="show-venue">Venue</label>
+                    <input type="text" id="show-venue">
+                </div>
+                
+                <div class="form-group">
+                    <label for="show-genre">Genre</label>
+                    <select id="show-genre">
+                        <option value="">Select Genre</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="theatre">Theatre</option>
+                        <option value="music">Music</option>
+                        <option value="dance">Dance</option>
+                        <option value="cabaret">Cabaret</option>
+                        <option value="children">Children's Shows</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="show-price">Price Range</label>
+                    <input type="text" id="show-price" placeholder="e.g. £8-12">
+                </div>
+                
+                <div class="form-group">
+                    <label for="show-rating">Rating</label>
+                    <input type="text" id="show-rating" placeholder="e.g. 15+, U, PG">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">➕ Add Show</button>
+            </form>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Venue</th>
+                        <th>Genre</th>
+                        <th>Performances</th>
+                        <th>Last Scraped</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="shows-list">
+                    <tr><td colspan="7">Loading shows...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Logs Tab -->
+        <div id="logs-tab" class="tab-content">
+            <h2>Scrape Logs</h2>
+            <p>Recent scraping activity</p>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Show</th>
+                        <th>Status</th>
+                        <th>Performances</th>
+                        <th>Duration</th>
+                        <th>Error</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody id="logs-list">
+                    <tr><td colspan="6">Loading logs...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Stats Tab -->
+        <div id="stats-tab" class="tab-content">
+            <h2>System Statistics</h2>
+            <div id="stats-content">Loading statistics...</div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

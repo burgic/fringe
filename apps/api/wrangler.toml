@@ -1,0 +1,49 @@
+name = "fringe-api"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "fringe-shows"
+database_id = "d18a6a61-ab0a-4ddf-88a2-f5f55c844876"
+
+# Service bindings to other workers
+[[services]]
+binding = "SCRAPER"
+service = "fringe-scraper"
+
+[[services]]
+binding = "SCHEDULER"
+service = "fringe-scheduler"
+
+[env.production]
+name = "fringe-api"
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "fringe-shows"
+database_id = "d18a6a61-ab0a-4ddf-88a2-f5f55c844876"
+
+[[env.production.services]]
+binding = "SCRAPER"
+service = "fringe-scraper"
+
+[[env.production.services]]
+binding = "SCHEDULER"
+service = "fringe-scheduler"
+
+[env.staging]
+name = "fringe-api-staging"
+
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "fringe-shows"
+database_id = "d18a6a61-ab0a-4ddf-88a2-f5f55c844876"
+
+[[env.staging.services]]
+binding = "SCRAPER"
+service = "fringe-scraper"
+
+[[env.staging.services]]
+binding = "SCHEDULER"
+service = "fringe-scheduler"

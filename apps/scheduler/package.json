@@ -1,0 +1,11 @@
+{
+  "name": "fringe-scheduler",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "trigger": "curl -X POST https://fringe-scheduler.hraasing.workers.dev/trigger",
+    "status": "curl https://fringe-scheduler.hraasing.workers.dev/status"
+  }
+}

@@ -1,0 +1,9 @@
+name = "fringe-frontend"
+compatibility_date = "2024-01-01"
+
+# Cloudflare Pages configuration
+[env.production]
+name = "fringe-frontend"
+
+[env.staging] 
+name = "fringe-frontend-staging"

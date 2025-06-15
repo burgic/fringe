@@ -1,0 +1,13 @@
+{
+  "name": "fringe-scraper",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "start": "wrangler dev"
+  },
+  "dependencies": {
+    "@cloudflare/puppeteer": "^1.0.2"
+  }
+}
