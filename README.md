@@ -4,8 +4,7 @@ A complete system for tracking Edinburgh Fringe show availability using Cloudfla
 
 ## 🏗️ Architecture
 
-- **Scraper**: Individual show data extraction using Puppeteer
-- **Scheduler**: Hourly automated scraping of all shows
+- **Scheduler**: Hourly automated updates of all shows
 - **API**: Fast lookup service with filtering
 - **Frontend**: User-facing website for date-based show search
 - **Admin**: Management dashboard for shows and monitoring
