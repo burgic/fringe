@@ -11,3 +11,6 @@ name = "fringe-scraper"
 
 [env.staging]
 name = "fringe-scraper-staging"
+
+[env.staging.browser]
+binding = "MYBROWSER"

@@ -1,0 +1,741 @@
+{
+  "success": true,
+  "showUrl": "https://www.edfringe.com/tickets/whats-on/david-o-doherty-highway-to-the-david-zone",
+  "performances": [
+    {
+      "id": 11031,
+      "dateTime": "2025-07-30T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "PREVIEW_SHOW",
+      "title": "PREVIEW",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168996",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11032,
+      "dateTime": "2025-07-31T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "PREVIEW_SHOW",
+      "title": "PREVIEW",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168997",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11033,
+      "dateTime": "2025-08-01T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168999",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11034,
+      "dateTime": "2025-08-02T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168998",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11035,
+      "dateTime": "2025-08-03T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:169008",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11036,
+      "dateTime": "2025-08-04T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:169009",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11037,
+      "dateTime": "2025-08-05T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:169010",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11038,
+      "dateTime": "2025-08-06T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168986",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11039,
+      "dateTime": "2025-08-07T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168987",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11040,
+      "dateTime": "2025-08-08T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:169000",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11041,
+      "dateTime": "2025-08-09T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:169001",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11042,
+      "dateTime": "2025-08-10T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:169007",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11043,
+      "dateTime": "2025-08-11T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168990",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11044,
+      "dateTime": "2025-08-13T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168989",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11045,
+      "dateTime": "2025-08-14T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168988",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11046,
+      "dateTime": "2025-08-15T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:169003",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11047,
+      "dateTime": "2025-08-16T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:169002",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11048,
+      "dateTime": "2025-08-17T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:169006",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11049,
+      "dateTime": "2025-08-18T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168991",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11050,
+      "dateTime": "2025-08-19T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168992",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11051,
+      "dateTime": "2025-08-20T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168993",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11052,
+      "dateTime": "2025-08-21T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168994",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11053,
+      "dateTime": "2025-08-22T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:169004",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11054,
+      "dateTime": "2025-08-23T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:169011",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11055,
+      "dateTime": "2025-08-24T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:169005",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    },
+    {
+      "id": 11056,
+      "dateTime": "2025-08-25T18:00:00.000Z",
+      "soldOut": false,
+      "ticketStatus": "TICKETS_AVAILABLE",
+      "title": "",
+      "duration": "60",
+      "status": "On Sale",
+      "cancelled": false,
+      "ticketsAvailable": false,
+      "boxOfficeId": "3:168995",
+      "eventTitle": "David O'Doherty: Highway to the David Zone",
+      "eventGenre": "COMEDY",
+      "eventSubGenre": "Stand-up",
+      "priceType": [
+        "PREVIEW"
+      ],
+      "freeTicketed": false,
+      "presentedBy": "Lisa Richards in association with Chambers Management",
+      "venueName": "Assembly George Square",
+      "venueAddress": "George Square",
+      "spaceName": "Gordon Aikman Theatre",
+      "accessibility": [
+        "WHEELCHAIR_ACCESS",
+        "WHEELCHAIR_ACCESSIBLE_TOILETS"
+      ]
+    }
+  ],
+  "count": 26,
+  "scrapedAt": "2025-06-16T16:54:40.020Z",
+  "debug": {
+    "networkCallsCount": 278,
+    "graphqlCallsDetected": 9,
+    "buttonClickResult": {
+      "totalButtons": 48,
+      "buyTicketButtonsFound": 1,
+      "clickAttempts": [
+        {
+          "index": 1,
+          "success": true,
+          "buttonText": "Buy tickets",
+          "buttonClasses": "button_btn__2nx5u         button_fullWidthMobile__wO3ML  ",
+          "hasIcon": true
+        }
+      ],
+      "timestamp": 1750092874980
+    },
+    "networkCalls": [
+      "REQUEST: https://edfringe-tikketr-web-api.equhost.com/graphql",
+      "RESPONSE: https://www.edfringe.com/tickets/assets/static/images/screen-loader.gif",
+      "RESPONSE: https://www.edfringe.com/tickets/_next/static/chunks/6806.c4a60275b9664d58.js",
+      "RESPONSE: https://edfringe-tikketr-web-api.equhost.com/graphql",
+      "RESPONSE: https://edfringe-tikketr-web-api.equhost.com/graphql",
+      "RESPONSE: https://www.edfringe.com/tickets/_next/static/chunks/7112.e3a483f23a61240e.js",
+      "RESPONSE: https://www.edfringe.com/tickets/_next/static/chunks/3599.e6de84681776c8b9.js",
+      "RESPONSE: https://www.edfringe.com/tickets/_next/static/chunks/6867.940791533c9f7a02.js",
+      "REQUEST: https://k.clarity.ms/collect",
+      "RESPONSE: https://k.clarity.ms/collect"
+    ],
+    "hasPerformanceData": true
+  }
+}
