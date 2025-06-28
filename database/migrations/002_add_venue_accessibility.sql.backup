@@ -1,0 +1,115 @@
+-- Migration: Add venue and accessibility support
+-- This migration adds comprehensive venue and accessibility tables
+-- while preserving existing show and performance data
+
+-- Venues table - stores detailed venue information
+CREATE TABLE IF NOT EXISTS venues (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  fringe_venue_id INTEGER UNIQUE, -- Edinburgh Fringe venue ID
+  title TEXT NOT NULL,
+  description TEXT,
+  venue_code TEXT, -- e.g., "C venues C nova"
+  address1 TEXT,
+  address2 TEXT,
+  post_code TEXT,
+  geo_location TEXT, -- JSON with lat/lng
+  slug TEXT,
+  images TEXT, -- JSON array of image URLs
+  attributes TEXT, -- JSON array of venue attributes (accessibility, etc.)
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Spaces table - individual performance spaces within venues
+CREATE TABLE IF NOT EXISTS spaces (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  fringe_space_id INTEGER UNIQUE, -- Edinburgh Fringe space ID
+  venue_id INTEGER,
+  title TEXT NOT NULL,
+  description TEXT,
+  venue_name TEXT, -- cached for performance
+  venue_code TEXT, -- cached for performance
+  accessibility_notes TEXT,
+  attributes TEXT, -- JSON array of space attributes
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (venue_id) REFERENCES venues (id)
+);
+
+-- Add new columns to existing shows table
+ALTER TABLE shows ADD COLUMN venue_id INTEGER REFERENCES venues(id);
+ALTER TABLE shows ADD COLUMN venue_code TEXT;
+ALTER TABLE shows ADD COLUMN fringe_url TEXT; -- normalized URL field
+ALTER TABLE shows ADD COLUMN run_time TEXT; -- e.g., "60 mins"
+ALTER TABLE shows ADD COLUMN image_url TEXT;
+ALTER TABLE shows ADD COLUMN active BOOLEAN DEFAULT TRUE; -- normalized from is_active
+
+-- Add new columns to existing performances table for rich data
+ALTER TABLE performances ADD COLUMN venue_id INTEGER REFERENCES venues(id);
+ALTER TABLE performances ADD COLUMN space_id INTEGER REFERENCES spaces(id);
+ALTER TABLE performances ADD COLUMN title TEXT; -- performance title
+ALTER TABLE performances ADD COLUMN description TEXT;
+ALTER TABLE performances ADD COLUMN estimated_end_date_time DATETIME;
+ALTER TABLE performances ADD COLUMN duration INTEGER; -- minutes
+ALTER TABLE performances ADD COLUMN cancelled BOOLEAN DEFAULT FALSE;
+ALTER TABLE performances ADD COLUMN tickets_available BOOLEAN DEFAULT TRUE;
+ALTER TABLE performances ADD COLUMN ticket_status_label TEXT; -- human readable status
+ALTER TABLE performances ADD COLUMN status TEXT; -- additional status info
+ALTER TABLE performances ADD COLUMN available BOOLEAN DEFAULT TRUE; -- computed availability
+ALTER TABLE performances ADD COLUMN price TEXT;
+ALTER TABLE performances ADD COLUMN ticket_url TEXT;
+ALTER TABLE performances ADD COLUMN notes TEXT;
+ALTER TABLE performances ADD COLUMN accessibility_notes TEXT;
+ALTER TABLE performances ADD COLUMN box_office_id TEXT;
+ALTER TABLE performances ADD COLUMN box_office_ref TEXT;
+ALTER TABLE performances ADD COLUMN accessibility TEXT; -- JSON array of accessibility features
+ALTER TABLE performances ADD COLUMN badges TEXT; -- JSON array of badges/labels
+ALTER TABLE performances ADD COLUMN venue_name TEXT; -- cached for performance
+ALTER TABLE performances ADD COLUMN space_name TEXT; -- cached for performance
+ALTER TABLE performances ADD COLUMN scraped_at DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+-- Performance history table - track changes over time
+CREATE TABLE IF NOT EXISTS performance_history (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  performance_id INTEGER NOT NULL,
+  show_id INTEGER NOT NULL,
+  date_time DATETIME NOT NULL,
+  sold_out BOOLEAN NOT NULL,
+  ticket_status TEXT NOT NULL,
+  tickets_available BOOLEAN,
+  price TEXT,
+  accessibility TEXT, -- JSON
+  scraped_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (performance_id) REFERENCES performances(id),
+  FOREIGN KEY (show_id) REFERENCES shows(id)
+);
+
+-- Update scrape_logs table with additional fields
+ALTER TABLE scrape_logs ADD COLUMN debug_info TEXT; -- JSON with debug information
+
+-- Create indexes for performance
+CREATE INDEX IF NOT EXISTS idx_venues_fringe_id ON venues(fringe_venue_id);
+CREATE INDEX IF NOT EXISTS idx_spaces_fringe_id ON spaces(fringe_space_id);
+CREATE INDEX IF NOT EXISTS idx_spaces_venue ON spaces(venue_id);
+CREATE INDEX IF NOT EXISTS idx_shows_venue ON shows(venue_id);
+CREATE INDEX IF NOT EXISTS idx_shows_active_new ON shows(active);
+CREATE INDEX IF NOT EXISTS idx_performances_venue ON performances(venue_id);
+CREATE INDEX IF NOT EXISTS idx_performances_space ON performances(space_id);
+CREATE INDEX IF NOT EXISTS idx_performances_available ON performances(available);
+CREATE INDEX IF NOT EXISTS idx_performances_scraped ON performances(scraped_at);
+CREATE INDEX IF NOT EXISTS idx_performance_history_scraped ON performance_history(scraped_at);
+
+-- Migrate existing data
+-- Copy is_active to active column
+UPDATE shows SET active = is_active WHERE active IS NULL;
+
+-- Copy url to fringe_url column  
+UPDATE shows SET fringe_url = url WHERE fringe_url IS NULL;
+
+-- Set default values for new performance columns
+UPDATE performances SET 
+  tickets_available = CASE WHEN sold_out = 0 THEN 1 ELSE 0 END,
+  available = CASE WHEN sold_out = 0 THEN 1 ELSE 0 END,
+  cancelled = 0,
+  scraped_at = last_checked
+WHERE tickets_available IS NULL;

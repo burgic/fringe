@@ -25,3 +25,7 @@ name = "fringe-scheduler-staging"
 binding = "DB"
 database_name = "fringe-shows"
 database_id = "d18a6a61-ab0a-4ddf-88a2-f5f55c844876"
+
+[[env.staging.services]]
+binding = "SCRAPER"
+service = "fringe-scraper-staging"

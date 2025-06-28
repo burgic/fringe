@@ -1,6 +1,9 @@
 name = "fringe-frontend"
 compatibility_date = "2024-01-01"
 
+[assets]
+directory = "src"
+
 # Cloudflare Pages configuration
 [env.production]
 name = "fringe-frontend"

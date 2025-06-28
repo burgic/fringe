@@ -42,8 +42,8 @@ database_id = "d18a6a61-ab0a-4ddf-88a2-f5f55c844876"
 
 [[env.staging.services]]
 binding = "SCRAPER"
-service = "fringe-scraper"
+service = "fringe-scraper-staging"
 
 [[env.staging.services]]
 binding = "SCHEDULER"
-service = "fringe-scheduler"
+service = "fringe-scheduler-staging"

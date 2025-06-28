@@ -1,0 +1,279 @@
+-- 004_enhanced_database_schema_with_full_ticket_status.sql
+-- Enhanced database schema for Fringe Show Tracker
+-- This schema supports all ticket status options from the GraphQL API
+
+-- Add new columns to existing shows table
+ALTER TABLE shows ADD COLUMN venue_id INTEGER;
+ALTER TABLE shows ADD COLUMN venue_code TEXT;
+
+-- Create venues table - stores detailed venue information
+CREATE TABLE IF NOT EXISTS venues (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fringe_venue_id INTEGER UNIQUE, -- Edinburgh Fringe venue ID
+    title TEXT NOT NULL,
+    description TEXT,
+    venue_code TEXT UNIQUE,
+    address1 TEXT,
+    address2 TEXT,
+    post_code TEXT,
+    geo_location TEXT, -- lat,lng format
+    slug TEXT,
+    images TEXT, -- JSON array of image objects
+    attributes TEXT, -- JSON array of venue attributes
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create spaces table - stores performance space information within venues
+CREATE TABLE IF NOT EXISTS spaces (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fringe_space_id INTEGER UNIQUE, -- Edinburgh Fringe space ID
+    venue_id INTEGER,
+    title TEXT NOT NULL,
+    description TEXT,
+    venue_name TEXT,
+    venue_code TEXT,
+    accessibility_notes TEXT,
+    attributes TEXT, -- JSON array of space attributes
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (venue_id) REFERENCES venues(id) ON DELETE SET NULL
+);
+
+-- Add new columns to existing performances table
+ALTER TABLE performances ADD COLUMN venue_id INTEGER;
+ALTER TABLE performances ADD COLUMN space_id INTEGER;
+ALTER TABLE performances ADD COLUMN title TEXT; -- Performance title (e.g., "PREVIEW")
+ALTER TABLE performances ADD COLUMN description TEXT;
+ALTER TABLE performances ADD COLUMN estimated_end_date_time DATETIME;
+ALTER TABLE performances ADD COLUMN duration INTEGER; -- Duration in minutes
+ALTER TABLE performances ADD COLUMN cancelled BOOLEAN DEFAULT 0;
+ALTER TABLE performances ADD COLUMN tickets_available BOOLEAN DEFAULT 0;
+ALTER TABLE performances ADD COLUMN status TEXT; -- Performance status ("On Sale", etc.)
+ALTER TABLE performances ADD COLUMN notes TEXT;
+ALTER TABLE performances ADD COLUMN accessibility_notes TEXT;
+ALTER TABLE performances ADD COLUMN box_office_id TEXT;
+ALTER TABLE performances ADD COLUMN box_office_ref TEXT;
+ALTER TABLE performances ADD COLUMN accessibility TEXT; -- JSON array of accessibility features
+ALTER TABLE performances ADD COLUMN badges TEXT; -- JSON array of performance badges
+
+-- Add foreign key constraints to performances table
+-- Note: SQLite doesn't support adding foreign keys to existing tables, so we'll create indexes instead
+CREATE INDEX IF NOT EXISTS idx_performances_venue_id ON performances(venue_id);
+CREATE INDEX IF NOT EXISTS idx_performances_space_id ON performances(space_id);
+
+-- Create ticket status options table - stores all possible ticket statuses
+CREATE TABLE IF NOT EXISTS ticket_status_options (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    value TEXT NOT NULL UNIQUE, -- e.g., 'TWO_FOR_ONE'
+    label TEXT NOT NULL, -- e.g., '2 for 1'
+    icon_name TEXT, -- e.g., 'two_for_one'
+    description TEXT,
+    active BOOLEAN DEFAULT 1,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Performance history table - keeps historical data for trends
+CREATE TABLE IF NOT EXISTS performance_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    performance_id INTEGER NOT NULL,
+    show_id INTEGER NOT NULL,
+    date_time DATETIME NOT NULL,
+    sold_out BOOLEAN DEFAULT 0,
+    cancelled BOOLEAN DEFAULT 0,
+    ticket_status TEXT,
+    available BOOLEAN DEFAULT 0,
+    scraped_at DATETIME NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (performance_id) REFERENCES performances(id) ON DELETE CASCADE,
+    FOREIGN KEY (show_id) REFERENCES shows(id) ON DELETE CASCADE
+);
+
+-- Admin users table - for managing access to admin functions
+CREATE TABLE IF NOT EXISTS admin_users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    name TEXT,
+    active BOOLEAN DEFAULT 1,
+    last_login DATETIME,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- System settings table - for configuration
+CREATE TABLE IF NOT EXISTS system_settings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    setting_key TEXT NOT NULL UNIQUE,
+    setting_value TEXT,
+    description TEXT,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create additional indexes for better query performance
+CREATE INDEX IF NOT EXISTS idx_shows_venue_id ON shows(venue_id);
+CREATE INDEX IF NOT EXISTS idx_shows_venue_code ON shows(venue_code);
+
+CREATE INDEX IF NOT EXISTS idx_venues_fringe_venue_id ON venues(fringe_venue_id);
+CREATE INDEX IF NOT EXISTS idx_venues_venue_code ON venues(venue_code);
+CREATE INDEX IF NOT EXISTS idx_venues_slug ON venues(slug);
+
+CREATE INDEX IF NOT EXISTS idx_spaces_fringe_space_id ON spaces(fringe_space_id);
+CREATE INDEX IF NOT EXISTS idx_spaces_venue_id ON spaces(venue_id);
+CREATE INDEX IF NOT EXISTS idx_spaces_venue_code ON spaces(venue_code);
+
+CREATE INDEX IF NOT EXISTS idx_performances_cancelled ON performances(cancelled);
+CREATE INDEX IF NOT EXISTS idx_performances_tickets_available ON performances(tickets_available);
+
+CREATE INDEX IF NOT EXISTS idx_performance_history_show_id ON performance_history(show_id);
+CREATE INDEX IF NOT EXISTS idx_performance_history_date ON performance_history(date_time);
+CREATE INDEX IF NOT EXISTS idx_performance_history_scraped_at ON performance_history(scraped_at);
+
+-- Create triggers to automatically update timestamps
+CREATE TRIGGER IF NOT EXISTS update_venues_timestamp 
+    AFTER UPDATE ON venues 
+    FOR EACH ROW 
+    BEGIN 
+        UPDATE venues SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id; 
+    END;
+
+CREATE TRIGGER IF NOT EXISTS update_spaces_timestamp 
+    AFTER UPDATE ON spaces 
+    FOR EACH ROW 
+    BEGIN 
+        UPDATE spaces SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id; 
+    END;
+
+CREATE TRIGGER IF NOT EXISTS update_system_settings_timestamp 
+    AFTER UPDATE ON system_settings 
+    FOR EACH ROW 
+    BEGIN 
+        UPDATE system_settings SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id; 
+    END;
+
+-- Insert default ticket status options
+INSERT OR IGNORE INTO ticket_status_options (value, label, icon_name, description) VALUES
+('TWO_FOR_ONE', '2 for 1', 'two_for_one', 'Special offer: buy one ticket, get one free'),
+('TICKETS_AVAILABLE', 'Available', 'tickets_available', 'Tickets are available for purchase'),
+('CANCELLED', 'Cancelled', 'cancelled', 'Performance has been cancelled'),
+('EVENT_SPECIFIC', 'Event Specific', 'event_specific', 'Special event with specific ticketing requirements'),
+('FREE_NON_TICKETED', 'Free (No Ticket)', 'free_non_ticketed', 'Free performance, no ticket required'),
+('FREE_TICKETED', 'Free', 'free_ticketed', 'Free performance, but ticket required'),
+('NO_ALLOCATION_CONTACT_VENUE', 'Contact Venue', 'no_allocation_contact_venue', 'No ticket allocation available, contact venue directly'),
+('PREVIEW_SHOW', 'Preview', 'preview_show', 'Preview performance before official opening');
+
+-- Insert default system settings
+INSERT OR IGNORE INTO system_settings (setting_key, setting_value, description) VALUES
+('scrape_interval_minutes', '60', 'How often to scrape show data (in minutes)'),
+('max_scrape_retries', '3', 'Maximum number of retry attempts for failed scrapes'),
+('scrape_timeout_seconds', '30', 'Timeout for individual scrape operations'),
+('cleanup_old_performances_days', '7', 'How many days of old performance data to keep'),
+('cleanup_old_logs_days', '30', 'How many days of old log data to keep'),
+('api_rate_limit_per_minute', '100', 'API rate limit per minute per IP'),
+('maintenance_mode', '0', 'Enable maintenance mode (1 = enabled, 0 = disabled)');
+
+-- Create views for common queries
+CREATE VIEW IF NOT EXISTS active_shows_with_latest_data AS
+SELECT 
+    s.id,
+    s.title,
+    s.venue,
+    s.venue_id,
+    s.venue_code,
+    s.genre,
+    s.price_range,
+    s.rating,
+    s.fringe_url,
+    s.created_at,
+    s.updated_at,
+    sl.status as last_scrape_status,
+    sl.scraped_at as last_scraped,
+    sl.performances_found,
+    sl.error_message,
+    COUNT(p.id) as total_performances,
+    SUM(CASE WHEN p.available = 1 AND p.sold_out = 0 AND p.cancelled = 0 THEN 1 ELSE 0 END) as available_performances,
+    SUM(CASE WHEN p.sold_out = 1 THEN 1 ELSE 0 END) as sold_out_performances,
+    v.title as venue_title,
+    v.address1,
+    v.post_code
+FROM shows s
+LEFT JOIN (
+    SELECT DISTINCT 
+        show_id, 
+        status, 
+        scraped_at, 
+        performances_found,
+        error_message,
+        ROW_NUMBER() OVER (PARTITION BY show_id ORDER BY scraped_at DESC) as rn
+    FROM scrape_logs
+) sl ON s.id = sl.show_id AND sl.rn = 1
+LEFT JOIN (
+    SELECT DISTINCT
+        p1.show_id,
+        p1.id,
+        p1.available,
+        p1.sold_out,
+        p1.cancelled
+    FROM performances p1
+    INNER JOIN (
+        SELECT show_id, MAX(scraped_at) as latest_scrape
+        FROM performances
+        GROUP BY show_id
+    ) p2 ON p1.show_id = p2.show_id AND p1.scraped_at = p2.latest_scrape
+    WHERE p1.date_time >= datetime('now', '-1 day')
+) p ON s.id = p.show_id
+LEFT JOIN venues v ON s.venue_id = v.fringe_venue_id
+WHERE s.active = 1
+GROUP BY s.id, s.title, s.venue, s.venue_id, s.venue_code, s.genre, s.price_range, s.rating, 
+         s.fringe_url, s.created_at, s.updated_at, sl.status, sl.scraped_at, sl.performances_found, 
+         sl.error_message, v.title, v.address1, v.post_code;
+
+CREATE VIEW IF NOT EXISTS upcoming_performances AS
+SELECT 
+    p.id,
+    p.show_id,
+    p.performance_id,
+    p.title as performance_title,
+    p.date_time,
+    p.estimated_end_date_time,
+    p.duration,
+    p.sold_out,
+    p.cancelled,
+    p.tickets_available,
+    p.ticket_status,
+    p.ticket_status_label,
+    p.status,
+    p.available,
+    p.price,
+    p.ticket_url,
+    p.accessibility,
+    p.badges,
+    p.scraped_at,
+    s.title as show_title,
+    s.venue,
+    s.venue_id,
+    s.genre,
+    s.price_range,
+    s.rating,
+    tso.label as status_label,
+    tso.icon_name as status_icon,
+    tso.description as status_description,
+    v.title as venue_title,
+    v.address1,
+    v.post_code,
+    v.attributes as venue_attributes,
+    sp.title as space_title,
+    sp.accessibility_notes as space_accessibility_notes,
+    sp.attributes as space_attributes
+FROM performances p
+INNER JOIN shows s ON p.show_id = s.id
+LEFT JOIN ticket_status_options tso ON p.ticket_status = tso.value
+LEFT JOIN venues v ON p.venue_id = v.id
+LEFT JOIN spaces sp ON p.space_id = sp.id
+INNER JOIN (
+    SELECT show_id, MAX(scraped_at) as latest_scrape
+    FROM performances
+    GROUP BY show_id
+) latest ON p.show_id = latest.show_id AND p.scraped_at = latest.latest_scrape
+WHERE s.active = 1 
+    AND p.date_time >= datetime('now')
+ORDER BY p.date_time;

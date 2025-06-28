@@ -4,7 +4,522 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edinburgh Fringe Show Finder</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .controls {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.9em;
+        }
+        
+        .filter-group input,
+        .filter-group select {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .filter-group input:focus,
+        .filter-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .date-navigation {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+        
+        .date-nav-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        
+        .date-nav-btn:hover:not(.disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .date-nav-btn:active:not(.disabled) {
+            transform: translateY(0);
+        }
+        
+        .date-nav-btn.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .date-navigation input[type="date"] {
+            flex: 1;
+            margin: 0;
+        }
+        
+        .current-date-display {
+            font-size: 0.85em;
+            color: #667eea;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .toggle-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            background: white;
+            color: #666;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            font-size: 0.9em;
+        }
+        
+        .toggle-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        
+        .toggle-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: #667eea;
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .toggle-btn .icon {
+            font-size: 1.1em;
+        }
+        
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            min-height: 400px;
+        }
+        
+        .grid-view {
+            padding: 25px;
+            overflow-x: auto;
+        }
+        
+        .show-grid {
+            display: table;
+            width: 100%;
+            min-width: 1000px;
+            border-collapse: separate;
+            border-spacing: 2px;
+        }
+        
+        .grid-header {
+            display: table-row;
+        }
+        
+        .grid-header-cell {
+            display: table-cell;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 8px 8px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            width: 20%;
+        }
+        
+        .time-slot {
+            display: table-row;
+        }
+        
+        .time-cell {
+            display: table-cell;
+            background: #f8fafc;
+            padding: 8px;
+            text-align: center;
+            vertical-align: top;
+            min-height: 80px;
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .time-label {
+            font-weight: 600;
+            font-size: 0.9em;
+            color: #667eea;
+            margin-bottom: 5px;
+            background: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .show-cell {
+            background: white;
+            border-radius: 8px;
+            padding: 8px;
+            margin: 2px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+            position: relative;
+            min-height: 60px;
+        }
+        
+        .show-cell:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .show-cell.available {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 2px solid #10b981;
+        }
+        
+        .show-cell.sold-out {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 2px solid #ef4444;
+            opacity: 0.7;
+        }
+        
+        .show-cell.preview {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 2px solid #f59e0b;
+        }
+        
+        .show-cell.free {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border: 2px solid #3b82f6;
+        }
+        
+        .show-cell.cancelled {
+            background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+            border: 2px solid #6b7280;
+            opacity: 0.6;
+        }
+        
+        .show-cell.unknown {
+            background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+            border: 2px solid #8b5cf6;
+        }
+        
+        .show-name {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 1.2;
+            margin-bottom: 4px;
+            color: #1f2937;
+        }
+        
+        .show-venue {
+            font-size: 10px;
+            color: #6b7280;
+            margin-bottom: 3px;
+        }
+        
+        .show-status {
+            position: absolute;
+            top: 2px;
+            right: 3px;
+            font-size: 8px;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .show-status.available { background: #10b981; color: white; }
+        .show-status.sold-out { background: #ef4444; color: white; }
+        .show-status.preview { background: #f59e0b; color: white; }
+        .show-status.free { background: #3b82f6; color: white; }
+        .show-status.cancelled { background: #6b7280; color: white; }
+        .show-status.unknown { background: #8b5cf6; color: white; }
+        
+        .accessibility-icon {
+            position: absolute;
+            bottom: 2px;
+            left: 3px;
+            font-size: 10px;
+            background: #17a2b8;
+            color: white;
+            padding: 1px 3px;
+            border-radius: 2px;
+        }
+        
+        .show-price {
+            font-size: 9px;
+            color: #059669;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+        
+        .empty-cell {
+            background: #fafafa;
+            color: #9ca3af;
+            font-style: italic;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 40px;
+        }
+        
+        footer a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        footer a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .close:hover {
+            color: #333;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 1200px) {
+            .grid-header-cell,
+            .show-cell {
+                font-size: 11px;
+            }
+            
+            .show-name {
+                font-size: 11px;
+            }
+            
+            .show-venue {
+                font-size: 9px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .filters {
+                grid-template-columns: 1fr;
+            }
+            
+            .toggle-buttons {
+                justify-content: center;
+            }
+            
+            .main-content {
+                border-radius: 15px;
+            }
+            
+            .grid-view {
+                padding: 15px;
+            }
+            
+            .show-grid {
+                min-width: 800px;
+            }
+            
+            .grid-header-cell {
+                padding: 10px 5px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -14,50 +529,82 @@
         </header>
 
         <div class="controls">
-            <div class="view-toggle">
-                <button class="view-btn active" data-view="spreadsheet">📊 Spreadsheet</button>
-                <button class="view-btn" data-view="grid">🔍 Advanced</button>
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="date-picker">📅 Date:</label>
+                    <div class="date-navigation">
+                        <button type="button" id="prev-date-btn" class="date-nav-btn" title="Previous day">
+                            <span>‹</span>
+                        </button>
+                        <input type="date" id="date-picker">
+                        <button type="button" id="next-date-btn" class="date-nav-btn" title="Next day">
+                            <span>›</span>
+                        </button>
+                    </div>
+                    <div id="current-date-display" class="current-date-display"></div>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="genre-filter">🎪 Genre:</label>
+                    <select id="genre-filter">
+                        <option value="">All Genres</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="theatre">Theatre</option>
+                        <option value="music">Music</option>
+                        <option value="dance">Dance</option>
+                        <option value="cabaret">Cabaret</option>
+                        <option value="children">Children's Shows</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="venue-filter">🏛️ Venue:</label>
+                    <input type="text" id="venue-filter" placeholder="e.g. Monkey Barrel">
+                </div>
             </div>
-
-            <div class="date-picker">
-                <label>📅</label>
-                <input type="date" id="date-picker" value="2025-08-01">
-            </div>
-
-            <div class="availability-toggle">
-                <span>Available only</span>
-                <div class="toggle-switch active" id="availability-toggle">
-                    <div class="toggle-slider"></div>
+            
+            <div class="toggle-buttons">
+                <div class="toggle-btn" id="available-only-btn">
+                    <span class="icon">🎫</span>
+                    <span>Available Only</span>
+                </div>
+                <div class="toggle-btn" id="accessible-only-btn">
+                    <span class="icon">♿</span>
+                    <span>Accessible Only</span>
                 </div>
             </div>
         </div>
 
         <div class="main-content">
-            <!-- Spreadsheet View (Default) -->
-            <div class="spreadsheet-view active" id="spreadsheet-view">
-                <table class="spreadsheet-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 120px;">Winners List</th>
-                            <th style="width: 120px;">Might Be Good</th>
-                            <th style="width: 120px;">Might be OK</th>
-                            <th style="width: 120px;">If it's raining</th>
-                            <th style="width: 120px;">Wild Cards</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Dynamic content loaded here -->
-                        <tr>
-                            <td class="empty-cell loading-cell" colspan="5">Loading shows...</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="grid-view">
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading shows...</p>
+                </div>
+                
+                <div class="show-grid hidden" id="show-grid">
+                    <div class="grid-header">
+                        <div class="grid-header-cell">🏆 Probably Great</div>
+                        <div class="grid-header-cell">✨ Probably Good</div>
+                        <div class="grid-header-cell">👍 Probably OK</div>
+                        <div class="grid-header-cell">🎲 Wildcards</div>
+                    </div>
+                    <!-- Dynamic content will be loaded here -->
+                </div>
             </div>
+        </div>
 
-            <!-- Advanced Grid View -->
-            <div class="grid-view" id="grid-view">
-                <div class="loading-message">Loading shows...</div>
-            </div>
+        <footer>
+            <p>Data updates hourly</p>
+            <div id="last-updated"></div>
+        </footer>
+    </div>
+
+    <div id="stats-modal" class="modal hidden" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="hideStats()">&times;</span>
+            <h2>📈 System Statistics</h2>
+            <div id="stats-content"></div>
         </div>
     </div>
 

@@ -523,3 +523,150 @@ h1 {
         padding: 10px 15px;
     }
 }
+
+/* Add this to your existing CSS file - enhanced status colors */
+
+/* Existing show cell status classes */
+.show-cell.available {
+    border-left: 4px solid #22c55e;
+}
+
+.show-cell.sold-out {
+    border-left: 4px solid #ef4444;
+    opacity: 0.7;
+}
+
+.show-cell.cancelled {
+    border-left: 4px solid #6b7280;
+    opacity: 0.5;
+}
+
+.show-cell.preview {
+    border-left: 4px solid #f59e0b;
+}
+
+.show-cell.free {
+    border-left: 4px solid #10b981;
+}
+
+/* NEW: Unknown status for shows without clear ticket info */
+.show-cell.unknown {
+    border-left: 4px solid #8b5cf6;
+}
+
+/* Status badges */
+.show-status.available {
+    background: #22c55e;
+    color: white;
+}
+
+.show-status.sold-out {
+    background: #ef4444;
+    color: white;
+}
+
+.show-status.cancelled {
+    background: #6b7280;
+    color: white;
+}
+
+.show-status.preview {
+    background: #f59e0b;
+    color: white;
+}
+
+.show-status.free {
+    background: #10b981;
+    color: white;
+}
+
+/* NEW: Unknown status badge */
+.show-status.unknown {
+    background: #8b5cf6;
+    color: white;
+}
+
+/* Enhanced show cell styling */
+.show-cell {
+    background: white;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 4px 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+    min-height: 80px;
+}
+
+.show-cell:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.show-status {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 12px;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}
+
+.show-name {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.2;
+    margin-top: 16px;
+    margin-bottom: 4px;
+}
+
+.show-venue {
+    font-size: 10px;
+    color: #6b7280;
+    margin-bottom: 2px;
+}
+
+.show-price {
+    font-size: 10px;
+    color: #374151;
+    font-weight: 500;
+}
+
+.accessibility-icon {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    font-size: 12px;
+}
+
+/* Update available only button to show it's not active by default */
+.filter-button {
+    padding: 8px 16px;
+    border: 2px solid #e5e7eb;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.filter-button:hover {
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+
+.filter-button.active {
+    border-color: #3b82f6;
+    background: #3b82f6;
+    color: white;
+}
+
+/* Help text for unknown status */
+.unknown-status-help {
+    font-size: 11px;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 2px;
+}
